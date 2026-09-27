@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head><body>
+<header><strong>SoundCloud <span>Remote</span></strong><small id="connection">Finding SoundCloud…</small></header>
+<section class="track"><img id="art" alt="" hidden><div><h2 id="title">Open SoundCloud on your PC</h2><p id="artist">Choose a track to get started</p></div></section>
+<input id="seek" type="range" min="0" max="1000" value="0" aria-label="Track position" disabled><div class="times"><span id="elapsed">0:00</span><span id="duration">0:00</span></div>
+<div class="transport"><button data-command="previous" title="Previous track" aria-label="Previous track"><svg viewBox="0 0 24 24"><path d="M5 5v14m14-14L8 12l11 7Z"/></svg></button><button id="play" data-command="toggle" class="primary" aria-label="Play">▶</button><button data-command="next" title="Next track" aria-label="Next track"><svg viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7Z"/></svg></button></div>
+<div class="row"><button data-command="seekBy" data-value="-10">−10 sec</button><button data-command="seekBy" data-value="10">+10 sec</button><button data-command="like" aria-pressed="false">♡ Like</button></div>
+<div class="row"><button data-command="shuffle" aria-pressed="false">Shuffle</button><button data-command="repeat" aria-pressed="false">Repeat</button><button data-command="mute" aria-pressed="false">Mute</button></div>
+<label for="volume">SOUNDCLOUD VOLUME <span id="level">—</span></label><input id="volume" type="range" min="0" max="100" value="70" disabled>
+<button id="connect">Connect / switch SoundCloud tab</button><p id="status" role="status">Playback controls work directly in this browser. Start the PC helper to also use your phone.</p>
+<script src="popup.js"></script></body></html>

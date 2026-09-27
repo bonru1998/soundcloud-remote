@@ -1,4 +1,4 @@
-# SoundCloud Wi-Fi Remote
+# SoundCloud Wi-Fi Remote 1.1
 
 An unofficial Android remote for SoundCloud playing on a Windows PC.
 
@@ -9,7 +9,7 @@ An unofficial Android remote for SoundCloud playing on a Windows PC.
 - [Android app — SoundCloud-Remote.apk](SoundCloud-Remote.apk?raw=true)
 - [PC companion + complete source code](SoundCloud-Remote-GitHub-Ready.zip?raw=true)
 
-The source ZIP contains the Android project, browser extension, Python helper, UI, tests, build script, and full setup instructions. Extract it before running anything.
+Source files are also browsable directly in this repository. The source ZIP contains the Android project, browser extension, Python helper, UI, tests, build script, and full setup instructions. Extract it before running anything.
 
 ## Setup
 
@@ -22,6 +22,16 @@ The source ZIP contains the Android project, browser extension, Python helper, U
 
 Keep the PC helper and SoundCloud tab open. See **START-HERE.txt** inside the ZIP for troubleshooting and reset instructions.
 
+## Update from 1.0
+
+Install the new APK over the existing app. Replace the PC helper, restart it, reload the extension in Chrome/Edge, and refresh SoundCloud.
+
+The extension popup now has playback buttons and live track details. Open the paired Android app to start the media notification; allow notifications if requested. The media card provides play/pause, previous/next, artwork and seeking on supported Android versions, with remote volume through Android's media session. Music remains on your PC.
+
+Turn **Media notification** off in the app's connection settings to disable background controls. **Hide remote** stops the current notification session. Phone-specific battery restrictions and lock-screen privacy settings may affect visibility.
+
+![Extension popup](Extension-Preview.png)
+
 ## Features
 
 Play/pause, previous/next, seeking, SoundCloud player volume, mute, shuffle/repeat, likes, and a PC-side sleep timer. Search and library shortcuts open on the PC. The waveform is a stylized progress display.
@@ -30,7 +40,7 @@ Play/pause, previous/next, seeking, SoundCloud player volume, mute, shuffle/repe
 
 Complete source and repeatable test scripts are in the source ZIP. Android builds use SDK platform 35, build-tools 35.0.0, JDK 17, and `android/build.sh`. Signing keys are excluded; rebuilding generates your own development key.
 
-APK compilation/signature verification, relay integration tests and simulated UI/adapter tests passed. Physical Android/Windows installation and live end-to-end playback have not been verified. Future SoundCloud site changes may require updating the extension.
+APK compilation/signature verification, relay integration tests and simulated UI/adapter tests passed. Physical Android/Windows installation, native media-notification behavior and live end-to-end playback have not been verified. Future SoundCloud site changes may require updating the extension.
 
 ## Privacy
 

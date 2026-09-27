@@ -1,0 +1,118 @@
+SOUNDCLOUD REMOTE 1.1 — Android + Windows PC
+=======================================
+
+ONE-TIME SETUP
+
+1. On your PC, extract this entire ZIP to a normal folder.
+   Do not run files while they are still inside the ZIP.
+
+2. Double-click Start-PC.bat.
+   It uses Python 3.10+ if already installed. Otherwise it downloads the
+   official portable Python runtime on first launch (about 11 MB), verifies
+   its SHA-256 checksum, and unpacks it. No separate installation is needed.
+   Keep its window open. It shows your PC address and a pairing code.
+   If Windows Firewall asks, allow Python on PRIVATE networks only.
+
+3. Install the included browser extension:
+   Chrome: open chrome://extensions
+   Edge: open edge://extensions
+   Enable Developer mode, click Load unpacked, select the extension folder.
+   Open or refresh https://soundcloud.com and start a track once.
+   Click the extension icon -> Connect SoundCloud tab.
+
+4. On Android, install SoundCloud-Remote.apk (provided separately).
+   Allow installation from your download app when Android asks.
+   Open SoundCloud Remote. Enter the PC address and six-digit code
+   shown in the helper window, then tap Pair with PC.
+   Both devices must be on the same trusted home network.
+   A PC connected by Ethernet to the same router also works.
+
+AFTER SETUP
+
+Start the PC helper and keep SoundCloud open. The phone remembers pairing.
+The extension reconnects to the selected tab. After closing/reopening that
+tab, use Connect SoundCloud tab again. The code expires after 10 minutes;
+restart the helper for a fresh code if pairing a new phone.
+
+CONTROLS
+
+Play/pause, previous/next, +/-10 seconds, seek, shuffle, repeat, like,
+SoundCloud player volume, mute and sleep timer (15/30/60/90 minutes).
+Search, Likes, Playlists and History open in your PC's SoundCloud tab.
+The sleep timer runs on the PC, so the phone can be locked afterwards.
+The waveform is a stylized progress display, not analyzed audio data.
+
+The PC's system-wide volume and audio output device are not changed.
+There is no in-phone track browser or queue editing in this version.
+SoundCloud login, subscription restrictions, ads and track availability
+continue to work as normal. Sign in on your PC if Like opens a login prompt.
+
+IF IT DOES NOT CONNECT
+
+- Ensure the helper window is open and the correct PC address was entered.
+- A VPN, guest Wi-Fi or router client isolation may block local connections.
+- Allow the Python executable through Windows Firewall for private networks.
+  The helper listens on TCP port 8765. Do not port-forward it to the internet.
+- Extension shows TAB: refresh SoundCloud, then connect the extension again.
+- Extension shows OFF: restart the PC helper. If you reset pairing, reconnect
+  the extension and pair your phone again.
+- Android needs Android 9 or newer and a current Android System WebView.
+- If the PC's address changes, tap the device card and pair again.
+- A control can be unavailable during ads, login prompts or restricted tracks.
+
+PRIVACY / RESET
+
+The app sends commands over your trusted local network using a pairing token.
+It uses local HTTP, not encryption. Do not use it on public/shared Wi-Fi.
+SoundCloud passwords stay in your PC browser. The phone may load SoundCloud
+album artwork directly. There is no analytics, account service or cloud relay.
+
+To revoke all paired devices, close the helper and run in the pc folder:
+  python\python.exe server.py --reset
+Or, if using an existing Python installation:
+  py -3 server.py --reset
+Then reconnect the extension and pair the phone again.
+
+BUILD AND TEST NOTES
+
+This is an unofficial first-version app, signed with a development key.
+The APK was compiled against Android API 35; minimum supported API is 28.
+Full app, helper and extension source is included, along with test scripts.
+The Android build script needs Android SDK platform 35/build-tools 35.0.0
+and JDK 17. Set ANDROID_JAR and BUILD_TOOLS, then run android/build.sh
+from a Bash shell. The build script generates a local development signing key. Use your own
+private release key before distributing a production build.
+
+Relay integration tests cover pairing/authentication, rate limits, origin
+checks, acknowledged commands, disconnects and the PC sleep timer.
+SoundCloud selectors and slider events were checked against the site's
+public player bundle during development. Future site changes may require
+updating extension/content.js and reloading the extension.
+
+No physical Android + Windows end-to-end test has been performed here.
+See tests/ for repeatable checks and TEST-RESULTS.txt for results.
+
+Uninstall: remove the Android app and browser extension, stop the helper,
+and delete this folder. Pairing data is stored under
+%LOCALAPPDATA%\SoundCloudRemote\pairing.json and can also be deleted.
+
+VERSION 1.1 UPDATE
+
+Install the new APK over the old app; its signing certificate is unchanged.
+Replace the PC helper files, restart Start-PC.bat, and reload the extension
+on chrome://extensions or edge://extensions. Refresh SoundCloud afterwards.
+If Chrome has lost the unpacked extension path, use Load unpacked again.
+
+The extension popup now includes previous/next, play/pause, +/-10 seconds,
+seeking, volume, mute, shuffle/repeat, and like. Popup playback works even
+without the PC helper. The helper is still required for the Android remote.
+
+After opening the paired Android app, a native media session shows track
+information and controls in Android's notification shade and lock screen.
+Allow notifications if asked. Sound continues to play on the PC.
+The remote runs as a foreground service while the app is in the background.
+Tap Hide remote in the media controls to stop it until the app is reopened.
+To disable it persistently, tap the PC/device card in the app and turn
+Media notification Off. Android/OEM battery restrictions can still stop it;
+reopen the app if controls disappear. Lock-screen visibility follows your
+phone's notification privacy settings. Actual layout varies by Android version.

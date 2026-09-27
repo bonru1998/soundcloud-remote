@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "SoundCloud Wi-Fi Remote",
+  "version": "1.1.0",
+  "description": "Connect your SoundCloud tab to your Android remote through a local PC helper.",
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*",
+    "https://soundcloud.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://soundcloud.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

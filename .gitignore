@@ -1,0 +1,10 @@
+android/build/
+*.keystore
+*.jks
+*.idsig
+__pycache__/
+*.pyc
+pc/python/
+pc/python-download.zip
+pairing.json
+.env

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111317"><title>SoundCloud Remote</title><link rel="icon" href="icon.svg"><link rel="stylesheet" href="style.css"></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="m5 5 11 7-11 7ZM19 5v14"/></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><path d="m19 5-11 7 11 7ZM5 5v14"/></symbol>
+<symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 6h3c4 0 8 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 10V7h16m-4-4 4 4-4 4M20 14v3H4m4-4-4 4 4 4"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 5c-3-3-7-1-8 2-1-3-5-5-8-2-5 5 3 11 8 15 5-4 13-10 8-15Z"/></symbol>
+<symbol id="i-pc" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9h4l5-5v16l-5-5H4Zm13-2c3 3 3 7 0 10m3-13c5 5 5 11 0 16"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0m-11 4a6 6 0 0 1 8 0"/><circle cx="12" cy="20" r=".6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M5 8h9a7 7 0 1 1-6 11M5 3v5h5"/></symbol>
+<symbol id="i-forward" viewBox="0 0 24 24"><path d="M19 8h-9a7 7 0 1 0 6 11m9-16v5h-5"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="m9 15 6-6m-5-3 2-2a6 6 0 0 1 8 8l-2 2M6 10l-2 2a6 6 0 0 0 8 8l2-2"/></symbol>
+</defs></svg>
+<main>
+<header><div class="brand"><img src="icon.svg" alt=""><div><h1><em>SOUNDCLOUD</em> REMOTE</h1><span>YOUR MUSIC. WITHIN REACH.</span></div></div><button id="settings" class="icon small" aria-label="Connection settings"><svg><use href="#i-link"/></svg></button></header>
+<button class="device panel" id="device"><svg><use href="#i-pc"/></svg><div><strong><span class="dot" id="dot"></span><span id="deviceName">CONNECT YOUR PC</span></strong><small id="connection">Tap to pair over Wi-Fi</small></div><svg class="wifi"><use href="#i-wifi"/></svg></button>
+<section class="panel player" aria-label="Music player">
+<div class="track"><div class="cover" id="cover"><img id="art" alt="Album artwork" hidden><svg id="placeholder"><use href="#i-volume"/></svg></div><div class="trackText"><span class="eyebrow">NOW PLAYING ON YOUR PC</span><h2 id="title">Ready when you are</h2><p id="artist">Pair your phone to get started</p><span class="live" id="playState">Wi-Fi music controller</span></div></div>
+<div class="scrub"><div class="wave" id="wave" aria-hidden="true"></div><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Track position" disabled></div>
+<div class="time"><span id="elapsed">0:00</span><span id="duration">0:00</span></div>
+<div class="transport"><button class="icon" data-command="shuffle" aria-label="Shuffle" aria-pressed="false"><svg><use href="#i-shuffle"/></svg></button><button class="icon" data-command="previous" aria-label="Previous track"><svg><use href="#i-prev"/></svg></button><button class="icon primary" data-command="toggle" id="play" aria-label="Play"><svg><use href="#i-play"/></svg></button><button class="icon" data-command="next" aria-label="Next track"><svg><use href="#i-next"/></svg></button><button class="icon" data-command="repeat" aria-label="Repeat" aria-pressed="false"><svg><use href="#i-repeat"/></svg></button></div>
+</section>
+<div class="quick four"><button data-command="seekBy" data-value="-10"><svg><use href="#i-back"/></svg><span>−10 sec</span></button><button data-command="seekBy" data-value="10"><svg><use href="#i-forward"/></svg><span>+10 sec</span></button><button data-command="like" aria-pressed="false"><svg><use href="#i-heart"/></svg><span>Like</span></button><button id="sleep"><svg><use href="#i-moon"/></svg><span id="sleepLabel">Sleep timer</span></button></div>
+<section class="panel volume"><div class="sectionTitle"><h3>SOUNDCLOUD VOLUME</h3><span id="volumeValue">—</span></div><div class="volumeRow"><button class="icon" data-command="mute" aria-label="Mute" aria-pressed="false"><svg><use href="#i-volume"/></svg></button><input id="volume" type="range" min="0" max="100" value="70" aria-label="SoundCloud volume" disabled><button id="volDown" aria-label="Lower volume">−</button><button id="volUp" aria-label="Raise volume">+</button></div></section>
+<section class="panel shortcuts"><div class="sectionTitle"><h3>QUICK CONTROLS</h3><span>OPENS ON PC</span></div><div class="quick four"><button id="search"><svg><use href="#i-search"/></svg><span>Search</span></button><button data-command="likes"><svg><use href="#i-heart"/></svg><span>Likes</span></button><button data-command="playlists"><svg><use href="#i-list"/></svg><span>Playlists</span></button><button data-command="history"><svg><use href="#i-clock"/></svg><span>History</span></button></div></section>
+<p class="hint" id="hint">Keep SoundCloud open in Chrome or Edge on your PC.</p>
+<footer><svg><use href="#i-wifi"/></svg><span>LOCAL CONNECTION</span><b>v1.1</b></footer>
+</main>
+<dialog id="pairDialog"><form id="pairForm"><div class="modalTop"><img src="icon.svg" alt=""><button type="button" class="close" data-close="pairDialog" aria-label="Close">×</button></div><h2>Your PC. Your music.</h2><p>Start the PC helper, then enter the address and six-digit code shown in its window.</p><label for="host">PC ADDRESS</label><input id="host" placeholder="192.168.1.10:8765" autocomplete="off" autocapitalize="off" spellcheck="false" required><label for="code">PAIRING CODE</label><input id="code" placeholder="000000" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" required><p class="error" id="pairError" role="alert"></p><button class="primary submit" id="pairSubmit">Pair with PC</button><p class="mini">Both devices must be on the same home network. No SoundCloud password needed.</p><button type="button" id="notificationToggle" class="textButton" hidden>Media notification: On</button><button type="button" id="forget" class="textButton">Forget this PC</button></form></dialog>
+<dialog id="searchDialog"><form id="searchForm"><button type="button" class="close" data-close="searchDialog" aria-label="Close">×</button><h2>Find something good.</h2><p>Search results open in your PC’s SoundCloud tab.</p><input id="query" placeholder="Track, artist or playlist" maxlength="200" required><button class="primary submit">Search on PC</button></form></dialog>
+<dialog id="sleepDialog"><button type="button" class="close" data-close="sleepDialog" aria-label="Close">×</button><h2>Sleep timer</h2><p>Pause SoundCloud after…</p><div class="sleepOptions"><button data-minutes="15">15 min</button><button data-minutes="30">30 min</button><button data-minutes="60">60 min</button><button data-minutes="90">90 min</button><button data-minutes="0">Cancel timer</button></div><p class="mini">Keep the PC helper and browser running.</p></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>

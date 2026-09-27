@@ -1,0 +1,47 @@
+Validation — 27 September 2026
+
+PASS: Android Java compilation, DEX generation, resource packaging and APK
+      alignment. APK signature verifies with v3 signing, minimum Android 9.
+      Seven deprecation warnings concern legacy window-inset/status-bar APIs.
+
+PASS: Four Python integration tests using a real local HTTP relay:
+      - pairing, bearer-token roles and pairing-attempt rate limits;
+      - expired code, cross-origin/DNS-rebinding rejection and input validation;
+      - command delivery, acknowledgment and pending-command cleanup;
+      - disconnected controls and PC-side sleep-timer command generation.
+
+PASS: Headless Chromium UI tests at 393px and 320px widths:
+      - pairing form, now-playing display, play/pause and seek commands;
+      - search and sleep-timer command submission;
+      - disabling controls after disconnection;
+      - no horizontal overflow and no JavaScript page errors.
+
+PASS: Actual extension content script exercised against a test DOM modeled
+      on the currently inspected SoundCloud player markup: playback status,
+      shuffle/repeat state, timeline time/duration, volume, play/pause click,
+      shuffle click, seek/volume pointer events and unknown-command rejection.
+
+CHECKED: SoundCloud's public player JavaScript for the actual selectors,
+         active classes, timeline ARIA attributes and volume drag offsets.
+
+NOT TESTED: Installation on a physical Android device, Windows runtime
+            execution, live audio playback or a real phone-to-PC Wi-Fi session.
+            Browser UI tests use simulated API state; they do not prove that
+            every SoundCloud account, ad state or future site update works.
+
+Preview.png shows the actual app UI with test track metadata, not live playback.
+
+Re-run relay tests: python tests/test_relay.py
+Re-run UI tests: set CHROME_BIN to a Chromium executable, install Playwright,
+                then run node tests/test_ui.cjs
+
+VERSION 1.1 VALIDATION
+- Android 1.1 / version code 2 builds and APK v3 signature verifies.
+- Signing certificate matches the original 1.0 APK for in-place updates.
+- Relay integration tests and mobile UI tests pass.
+- Extension popup browser tests pass for metadata, playback, volume and
+  disconnection. Previous/next icons are SVG for consistent rendering.
+- Adapter checks cover idempotent play and pause for MediaSession callbacks.
+- Native MediaSession + MediaStyle notification, remote volume provider,
+  foreground-service lifecycle and lock-screen behavior compile against API 35.
+  These Android features have NOT been runtime-tested on a phone/emulator.
