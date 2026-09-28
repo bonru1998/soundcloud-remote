@@ -3,6 +3,7 @@ const $ = s => document.querySelector(s);
 let config;
 try { config = JSON.parse(localStorage.getItem('connection') || 'null'); } catch (_) { config = null; }
 let connected = false, current = {}, polling = false, commandBusy = false, toastTimer;
+let requestedVolume = null, requestedVolumeAt = 0;
 const nativeCallbacks = new Map();
 window.nativeResult = (id, result) => { const done = nativeCallbacks.get(id); if(done) { nativeCallbacks.delete(id); done(result); } };
 function nativeFetch(host, path, method, body, token) {
@@ -33,11 +34,17 @@ function enableControls() {
     button.disabled=!connected || commandBusy || !supported;
   });
   $('#seek').disabled=!connected || !current.seekAvailable || !current.duration || commandBusy;
-  for(const id of ['volume','volDown','volUp']) $('#'+id).disabled=!connected || !current.volumeAvailable || commandBusy;
+  $('#volume').disabled=!connected || !current.volumeAvailable || commandBusy;
+  const canAdjustVolume=typeof current.volume==='number' && Number.isFinite(current.volume);
+  for(const id of ['volDown','volUp']) $('#'+id).disabled=!connected || !current.volumeAvailable || !canAdjustVolume || commandBusy;
   for(const id of ['search','sleep']) $('#'+id).disabled=!connected || commandBusy;
 }
 function paint(data) {
   connected=!!data.connected; current=data.state || {};
+  if(requestedVolume!==null) {
+    if((typeof current.volume==='number' && Math.abs(current.volume-requestedVolume)<.01) || Date.now()-requestedVolumeAt>3000) requestedVolume=null;
+    else current={...current,volume:requestedVolume};
+  }
   $('#dot').classList.toggle('online',connected);
   $('#deviceName').textContent=data.device || 'DESKTOP PC';
   $('#connection').textContent=connected ? 'Connected via Wi-Fi' : 'Helper online · connect SoundCloud extension';
@@ -72,17 +79,28 @@ async function poll() {
 async function send(type,value) {
   if(!connected) { toast('Connect SoundCloud on your PC first.'); return false; }
   if(commandBusy) return false;
+  if(type==='volume') {
+    requestedVolume=Math.max(0,Math.min(1,Number(value)));
+    requestedVolumeAt=Date.now();
+    current={...current,volume:requestedVolume};
+    $('#volume').value=Math.round(requestedVolume*100);
+    $('#volumeValue').textContent=Math.round(requestedVolume*100)+'%';
+  }
   commandBusy=true; enableControls();
   try { await request('/api/command',{type,...(value!==undefined?{value}:{})}); await poll(); return true; }
-  catch(error) {toast(error.message); return false;}
+  catch(error) {if(type==='volume')requestedVolume=null;toast(error.message); return false;}
   finally {commandBusy=false;enableControls();}
 }
 document.querySelectorAll('[data-command]').forEach(button=>button.onclick=()=>send(button.dataset.command,button.dataset.value!==undefined?Number(button.dataset.value):undefined));
 $('#seek').onchange=e=>send('seekTo',Number(e.target.value)/1000);
 $('#volume').oninput=e=>$('#volumeValue').textContent=e.target.value+'%';
 $('#volume').onchange=e=>send('volume',Number(e.target.value)/100);
-$('#volDown').onclick=()=>send('volume',Math.max(0,(Number($('#volume').value)-5)/100));
-$('#volUp').onclick=()=>send('volume',Math.min(1,(Number($('#volume').value)+5)/100));
+function adjustVolume(delta) {
+  if(typeof current.volume!=='number' || !Number.isFinite(current.volume)) return;
+  send('volume',Math.max(0,Math.min(1,current.volume+delta)));
+}
+$('#volDown').onclick=()=>adjustVolume(-.05);
+$('#volUp').onclick=()=>adjustVolume(.05);
 $('#settings').onclick=openPair; $('#device').onclick=openPair;
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).close());
 $('#pairForm').onsubmit=async e=>{

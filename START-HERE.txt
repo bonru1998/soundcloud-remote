@@ -1,4 +1,4 @@
-SOUNDCLOUD REMOTE 1.1 — Android + Windows PC
+SOUNDCLOUD REMOTE 1.1.1 — Android + Windows PC
 =======================================
 
 ONE-TIME SETUP
@@ -96,7 +96,7 @@ Uninstall: remove the Android app and browser extension, stop the helper,
 and delete this folder. Pairing data is stored under
 %LOCALAPPDATA%\SoundCloudRemote\pairing.json and can also be deleted.
 
-VERSION 1.1 UPDATE
+VERSION 1.1.1 UPDATE
 
 Install the new APK over the old app; its signing certificate is unchanged.
 Replace the PC helper files, restart Start-PC.bat, and reload the extension
@@ -116,3 +116,6 @@ To disable it persistently, tap the PC/device card in the app and turn
 Media notification Off. Android/OEM battery restrictions can still stop it;
 reopen the app if controls disappear. Lock-screen visibility follows your
 phone's notification privacy settings. Actual layout varies by Android version.
+
+Version 1.1.1 fixes the volume minus/plus controls so they step from the
+volume reported by SoundCloud and wait for the updated reading to arrive.

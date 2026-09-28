@@ -17,7 +17,7 @@ const root=path.resolve(__dirname,'..');
    let data;
    if(url.pathname==='/api/pair'){paired=true;data={ok:true,token:'test-token'};}
    else if(url.pathname==='/api/state')data={ok:true,connected:online,state,device:'DESKTOP PC',sleepRemaining:0};
-   else {commands.push(body);if(body.type==='toggle')state.playing=!state.playing;data={ok:true};}
+   else {commands.push(body);if(body.type==='toggle')state.playing=!state.playing;if(body.type==='volume')state.volume=body.value;data={ok:true};}
    return route.fulfill({json:data});
   }
   const name=url.pathname==='/'?'index.html':url.pathname.slice(1);
@@ -38,6 +38,12 @@ const root=path.resolve(__dirname,'..');
  await page.waitForFunction(()=>!document.querySelector('#search').disabled);assert.equal(commands.at(-1).type,'search');
  await page.click('#sleep');await page.click('[data-minutes="30"]');
  await page.waitForFunction(()=>!document.querySelector('#sleep').disabled);assert.equal(commands.at(-1).value,30);
+ await page.click('#volDown');await page.waitForFunction(()=>commands.at(-1)?.type==='volume');assert.equal(commands.at(-1).value,.63);
+ await page.click('#volUp');await page.waitForFunction(()=>commands.at(-1)?.value===.68);assert.equal(commands.at(-1).value,.68);
+ state.volume=null;await page.waitForFunction(()=>document.querySelector('#volDown').disabled&&document.querySelector('#volUp').disabled);
+ state.volume=.04;await page.waitForFunction(()=>!document.querySelector('#volDown').disabled);
+ await page.click('#volDown');await page.waitForFunction(()=>commands.at(-1)?.value===0);assert.equal(commands.at(-1).value,0);
+ await page.click('#volUp');await page.waitForFunction(()=>commands.at(-1)?.value===.09);assert.equal(commands.at(-1).value,.09);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.setViewportSize({width:320,height:740});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  online=false;await page.waitForFunction(()=>document.querySelector('#play').disabled);assert(await page.locator('#volume').isDisabled());

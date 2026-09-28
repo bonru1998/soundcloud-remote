@@ -1,4 +1,4 @@
-Validation — 27 September 2026
+Validation — 28 September 2026
 
 PASS: Android Java compilation, DEX generation, resource packaging and APK
       alignment. APK signature verifies with v3 signing, minimum Android 9.
@@ -35,10 +35,14 @@ Re-run relay tests: python tests/test_relay.py
 Re-run UI tests: set CHROME_BIN to a Chromium executable, install Playwright,
                 then run node tests/test_ui.cjs
 
-VERSION 1.1 VALIDATION
-- Android 1.1 / version code 2 builds and APK v3 signature verifies.
+VERSION 1.1.1 VALIDATION
+- Android 1.1.1 / version code 3 builds and APK v3 signature verifies.
 - Signing certificate matches the original 1.0 APK for in-place updates.
-- Relay integration tests and mobile UI tests pass.
+- Four PC relay integration tests pass.
+- The UI regression test now checks volume up/down targets, low-volume clamping,
+  and disabling relative controls when the current volume is unavailable.
+- This environment's bundled Chromium crashes at startup, so the browser UI
+  test could not be run for this patch. JavaScript syntax checks pass.
 - Extension popup browser tests pass for metadata, playback, volume and
   disconnection. Previous/next icons are SVG for consistent rendering.
 - Adapter checks cover idempotent play and pause for MediaSession callbacks.
