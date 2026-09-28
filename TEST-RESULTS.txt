@@ -35,8 +35,8 @@ Re-run relay tests: python tests/test_relay.py
 Re-run UI tests: set CHROME_BIN to a Chromium executable, install Playwright,
                 then run node tests/test_ui.cjs
 
-VERSION 1.1.1 VALIDATION
-- Android 1.1.1 / version code 3 builds and APK v3 signature verifies.
+VERSION 1.1.2 VALIDATION
+- Android 1.1.2 / version code 4 builds and APK v3 signature verifies.
 - Signing certificate matches the original 1.0 APK for in-place updates.
 - Four PC relay integration tests pass.
 - The UI regression test now checks volume up/down targets, low-volume clamping,

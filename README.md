@@ -1,4 +1,4 @@
-# SoundCloud Wi-Fi Remote 1.1.1
+# SoundCloud Wi-Fi Remote 1.1.2
 
 An unofficial Android remote for SoundCloud playing on a Windows PC.
 
@@ -6,8 +6,8 @@ An unofficial Android remote for SoundCloud playing on a Windows PC.
 
 ## Downloads
 
-- [Download Android APK](https://github.com/bonru1998/soundcloud-remote/releases/latest/download/SoundCloud-Remote-v1.1.1.apk)
-- [Download Windows PC companion + complete source ZIP](https://github.com/bonru1998/soundcloud-remote/releases/latest/download/SoundCloud-Remote-PC-v1.1.1.zip)
+- [Download Android APK](https://github.com/bonru1998/soundcloud-remote/releases/latest/download/SoundCloud-Remote-v1.1.2.apk)
+- [Download Windows PC companion + complete source ZIP](https://github.com/bonru1998/soundcloud-remote/releases/latest/download/SoundCloud-Remote-PC-v1.1.2.zip)
 
 Source files are also browsable directly in this repository. The source ZIP contains the Android project, browser extension, Python helper, UI, tests, build script, and full setup instructions. Extract it before running anything.
 
@@ -24,11 +24,11 @@ Keep the PC helper and SoundCloud tab open. See **START-HERE.txt** inside the ZI
 
 ## Update from 1.0
 
-Install the latest APK over the existing app. Replace the PC helper, restart it, reload the extension in Chrome/Edge, and refresh SoundCloud. The current release is [v1.1.1](https://github.com/bonru1998/soundcloud-remote/releases/latest).
+Install the latest APK over the existing app. Replace the PC helper, restart it, reload the extension in Chrome/Edge, and refresh SoundCloud. The current release is [v1.1.2](https://github.com/bonru1998/soundcloud-remote/releases/latest).
 
 The extension popup now has playback buttons and live track details. Open the paired Android app to start the media notification; allow notifications if requested. The media card provides play/pause, previous/next, artwork and seeking on supported Android versions, with remote volume through Android's media session. Music remains on your PC.
 
-Version 1.1.1 fixes the Android app's volume −/+ buttons so they step from SoundCloud's reported volume and don't send a guessed value when the current volume is unavailable.
+Version 1.1.2 fixes the Android app's volume −/+ buttons so they step from SoundCloud's reported volume, keep the selected level visible while the PC catches up, and don't send guessed values when the current volume is unavailable.
 
 Turn **Media notification** off in the app's connection settings to disable background controls. **Hide remote** stops the current notification session. Phone-specific battery restrictions and lock-screen privacy settings may affect visibility.
 
