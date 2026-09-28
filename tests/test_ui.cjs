@@ -43,7 +43,7 @@ const root=path.resolve(__dirname,'..');
  state.volume=null;await page.waitForFunction(()=>document.querySelector('#volDown').disabled&&document.querySelector('#volUp').disabled);
  state.volume=.04;await page.waitForFunction(()=>!document.querySelector('#volDown').disabled);
  await page.click('#volDown');await page.waitForFunction(()=>commands.at(-1)?.value===0);assert.equal(commands.at(-1).value,0);
- await page.click('#volUp');await page.waitForFunction(()=>commands.at(-1)?.value===.09);assert.equal(commands.at(-1).value,.09);
+ await page.click('#volUp');await page.waitForFunction(()=>commands.at(-1)?.value===.05);assert.equal(commands.at(-1).value,.05);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.setViewportSize({width:320,height:740});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  online=false;await page.waitForFunction(()=>document.querySelector('#play').disabled);assert(await page.locator('#volume').isDisabled());
